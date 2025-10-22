@@ -4,9 +4,9 @@ interface LogoProps {
 
 const Logo = ({ size = "md" }: LogoProps) => {
   const sizes = {
-    sm: { icon: "w-10 h-10", text: "text-xl", container: "gap-2" },
-    md: { icon: "w-16 h-16", text: "text-3xl", container: "gap-3" },
-    lg: { icon: "w-24 h-24", text: "text-5xl", container: "gap-4" },
+    sm: { icon: "w-8 h-8 sm:w-10 sm:h-10", text: "text-lg sm:text-xl", container: "gap-2" },
+    md: { icon: "w-12 h-12 sm:w-16 sm:h-16", text: "text-2xl sm:text-3xl", container: "gap-2 sm:gap-3" },
+    lg: { icon: "w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24", text: "text-3xl sm:text-4xl md:text-5xl", container: "gap-3 sm:gap-4" },
   };
 
   const { icon: iconSize, text, container } = sizes[size];

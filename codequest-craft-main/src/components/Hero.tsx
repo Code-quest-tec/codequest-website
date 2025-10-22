@@ -85,12 +85,10 @@ const Hero = () => {
         "Relatórios detalhados",
         "Relatórios de vendas",
         "Design personalizado",
-        "Páginas ilimitadas",
         "E-commerce completo",
         "Sistema administrativo avançado",
         "Sistema de pagamento",
         "Relatórios detalhados",
-        "SEO otimizado",
         "Suporte 90 dias"
       ],
       notIncluded: [],
@@ -110,70 +108,70 @@ const Hero = () => {
           
           {/* Conteúdo inicial do Hero - sempre visível */}
           <div className={`space-y-4 transition-opacity duration-500 ${showPlans ? 'opacity-30' : 'opacity-100'}`}>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight px-4">
               Transformamos ideias em
               <span className="block text-primary mt-2">soluções digitais</span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto px-4">
               Desenvolvemos websites e sistemas personalizados para levar seu negócio ao próximo nível
             </p>
           </div>
           
-          <div className={`flex flex-col sm:flex-row gap-4 pt-4 transition-opacity duration-500 ${showPlans ? 'opacity-30' : 'opacity-100'}`}>
+          <div className={`flex flex-col sm:flex-row gap-4 pt-4 px-4 transition-opacity duration-500 ${showPlans ? 'opacity-30' : 'opacity-100'}`}>
             <Button 
               variant="hero" 
               size="lg" 
-              className="group" 
+              className="group w-full sm:w-auto" 
               onClick={() => setShowPlans(true)}
             >
               Começar projeto
             </Button>
-            <Button variant="outline" size="lg">
+            <Button variant="outline" size="lg" className="w-full sm:w-auto">
               Ver portfólio
             </Button>
           </div>
           
-          <div className={`pt-8 flex gap-8 text-sm text-muted-foreground transition-opacity duration-500 ${showPlans ? 'opacity-30' : 'opacity-100'}`}>
-            <div className="flex flex-col">
-              <span className="text-3xl font-bold text-primary">50+</span>
-              <span>Projetos entregues</span>
+          <div className={`pt-8 flex flex-col sm:flex-row gap-6 sm:gap-8 text-sm text-muted-foreground transition-opacity duration-500 px-4 ${showPlans ? 'opacity-30' : 'opacity-100'}`}>
+            <div className="flex flex-col items-center sm:items-start">
+              <span className="text-2xl sm:text-3xl font-bold text-primary">50+</span>
+              <span className="text-center sm:text-left">Projetos entregues</span>
             </div>
-            <div className="flex flex-col">
-              <span className="text-3xl font-bold text-primary">100%</span>
-              <span>Satisfação</span>
+            <div className="flex flex-col items-center sm:items-start">
+              <span className="text-2xl sm:text-3xl font-bold text-primary">100%</span>
+              <span className="text-center sm:text-left">Satisfação</span>
             </div>
-            <div className="flex flex-col">
-              <span className="text-3xl font-bold text-primary">24/7</span>
-              <span>Suporte</span>
+            <div className="flex flex-col items-center sm:items-start">
+              <span className="text-2xl sm:text-3xl font-bold text-primary">24/7</span>
+              <span className="text-center sm:text-left">Suporte</span>
             </div>
           </div>
 
           {/* Cards de Planos - sobrepostos */}
           {showPlans && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-md">
-              <div className="w-full max-w-7xl px-4">
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-md p-4">
+              <div className="w-full max-w-7xl">
                 {/* Header com animação */}
-                <div className="flex items-center justify-between w-full max-w-5xl mx-auto mb-12 animate-fade-in-up">
+                <div className="flex flex-col sm:flex-row items-center justify-between w-full max-w-5xl mx-auto mb-6 sm:mb-8 animate-fade-in-up gap-4">
                   <Button 
                     variant="outline" 
                     onClick={() => setShowPlans(false)}
-                    className="flex items-center gap-2 bg-background/95 backdrop-blur-sm hover:bg-primary/10 border-primary/30 hover:border-primary transition-all duration-300"
+                    className="flex items-center gap-2 bg-background/95 backdrop-blur-sm hover:bg-primary/10 border-primary/30 hover:border-primary transition-all duration-300 w-full sm:w-auto order-2 sm:order-1"
                   >
                   <ArrowLeft className="w-4 h-4" /> 
                     Voltar
                   </Button>
                   
-                  <div className="text-center">
-                    <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent mb-2">
+                  <div className="text-center order-1 sm:order-2">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent mb-2">
                       Escolha seu plano
                     </h2>
-                    <p className="text-muted-foreground text-lg">
+                    <p className="text-muted-foreground text-sm sm:text-base lg:text-lg">
                       Selecione a opção ideal para sua presença digital
                     </p>
                   </div>
                   
-                  <div className="w-24"></div> {/* Spacer para centralizar o título */}
+                  <div className="w-full sm:w-24 order-3"></div> {/* Spacer para centralizar o título */}
                 </div>
 
                 {/* Cards com animação melhorada */}

@@ -68,40 +68,40 @@ const PlansCards = ({ plans, onPlanSelect }: PlansCardsProps) => {
 
   const PlanCard = ({ plan, index }: { plan: Plan; index: number }) => (
     <div
-      className={`relative p-4 md:p-5 rounded-2xl border-2 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl bg-background/98 backdrop-blur-sm flex flex-col ${
+      className={`relative p-4 sm:p-5 md:p-6 rounded-xl border-2 transition-all duration-500 bg-background/98 backdrop-blur-sm flex flex-col w-full max-w-sm mx-auto ${
         plan.popular
-          ? "border-primary bg-gradient-to-br from-primary/5 to-primary/10 shadow-xl scale-105 ring-2 ring-primary/20"
+          ? "border-primary bg-gradient-to-br from-primary/5 to-primary/10 shadow-xl ring-2 ring-primary/20"
           : "border-border hover:border-primary/50 hover:bg-card/80"
-      }`}
+      } ${plan.name === "Premium" ? "min-h-[400px] sm:min-h-[450px]" : ""}`}
     >
       {plan.popular && (
         <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-          <span className="bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-semibold">
+          <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-semibold">
             Mais Popular
           </span>
         </div>
       )}
 
-      <div className="text-center mb-4 flex-shrink-0">
-        <h3 className="text-xl font-bold mb-1">{plan.name}</h3>
+      <div className="text-center mb-5 flex-shrink-0">
+        <h3 className="text-lg sm:text-xl font-bold mb-2 text-foreground">{plan.name}</h3>
         <p className="text-muted-foreground mb-3 text-sm leading-relaxed">{plan.description}</p>
-        <div className="text-3xl font-bold text-primary mb-1">
+        <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">
           R$ {plan.price}
-          <span className="text-base font-normal text-muted-foreground">/projeto</span>
+          <span className="text-sm font-normal text-muted-foreground">/projeto</span>
         </div>
       </div>
 
-      <div className="space-y-3 mb-4 flex-grow">
+      <div className="space-y-4 mb-5 flex-grow">
         <div>
-          <h4 className="font-semibold text-xs text-green-600 mb-2 flex items-center gap-2">
-            <div className="w-1.5 h-1.5 bg-green-600 rounded-full"></div>
+          <h4 className="font-semibold text-sm text-green-600 mb-3 flex items-center gap-2">
+            <div className="w-2 h-2 bg-green-600 rounded-full"></div>
             Incluído
           </h4>
-          <ul className="space-y-1.5 pr-2">
+          <ul className="space-y-2">
             {plan.features.map((feature, featureIndex) => (
-              <li key={featureIndex} className="flex items-center gap-2 text-xs">
-                <Check className="w-3 h-3 text-green-600 flex-shrink-0" />
-                <span className="leading-relaxed">{feature}</span>
+              <li key={featureIndex} className="flex items-start gap-3 text-sm">
+                <Check className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                <span className="leading-relaxed text-foreground">{feature}</span>
               </li>
             ))}
           </ul>
@@ -109,14 +109,14 @@ const PlansCards = ({ plans, onPlanSelect }: PlansCardsProps) => {
 
         {plan.notIncluded.length > 0 && (
           <div>
-            <h4 className="font-semibold text-xs text-red-500 mb-2 flex items-center gap-2">
-              <div className="w-1.5 h-1.5 bg-red-500 rounded-full"></div>
+            <h4 className="font-semibold text-sm text-red-500 mb-3 flex items-center gap-2">
+              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
               Não incluído
             </h4>
-            <ul className="space-y-1.5 pr-2">
+            <ul className="space-y-2">
               {plan.notIncluded.map((feature, featureIndex) => (
-                <li key={featureIndex} className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <X className="w-3 h-3 text-red-500 flex-shrink-0" />
+                <li key={featureIndex} className="flex items-start gap-3 text-sm text-muted-foreground">
+                  <X className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
                   <span className="leading-relaxed">{feature}</span>
                 </li>
               ))}
@@ -125,8 +125,8 @@ const PlansCards = ({ plans, onPlanSelect }: PlansCardsProps) => {
         )}
 
         {/* Seção de Suporte Estendido */}
-        <div className="mt-4 p-3 rounded-md bg-primary/5 border border-primary/10">
-          <p className="text-xs text-muted-foreground text-center">
+        <div className="mt-4 p-3 rounded-lg bg-primary/5 border border-primary/10">
+          <p className="text-xs text-muted-foreground text-center leading-relaxed">
             💡 Caso queira continuar com suporte: <span className="font-semibold text-primary">30% do valor do plano</span> será cobrado
           </p>
         </div>
@@ -134,12 +134,12 @@ const PlansCards = ({ plans, onPlanSelect }: PlansCardsProps) => {
 
       <Button
         onClick={() => onPlanSelect(plan.name, plan.price)}
-        className={`w-full h-12 text-sm font-semibold rounded-xl transition-all duration-300 group relative overflow-hidden ${
+        className={`w-full h-10 text-sm font-semibold rounded-lg transition-all duration-300 group relative overflow-hidden ${
           plan.popular
             ? "bg-gradient-to-r from-primary via-primary to-primary-glow hover:from-primary-glow hover:via-primary-glow hover:to-primary shadow-lg hover:shadow-xl hover:shadow-primary/25"
             : "bg-gradient-to-r from-primary to-primary-glow hover:from-primary-glow hover:to-primary shadow-md hover:shadow-lg hover:shadow-primary/20"
         }`}
-        size="lg"
+        size="sm"
       >
         <span className="relative z-10 flex items-center justify-center gap-2">
           Escolher {plan.name}
@@ -151,16 +151,16 @@ const PlansCards = ({ plans, onPlanSelect }: PlansCardsProps) => {
   );
 
   return (
-    <div className="w-full max-w-5xl mx-auto animate-slide-in-from-right">
+    <div className="w-full max-w-6xl mx-auto animate-slide-in-from-right">
       {/* Desktop: Grid */}
-      <div className="hidden md:grid grid-cols-3 gap-4">
+      <div className="hidden md:grid grid-cols-3 gap-6 lg:gap-8">
         {plans.map((plan, index) => (
           <PlanCard key={index} plan={plan} index={index} />
         ))}
       </div>
 
       {/* Mobile: Manual Navigation */}
-      <div className="md:hidden relative px-12">
+      <div className="md:hidden relative px-12 sm:px-16">
         <div 
           className="w-full overflow-hidden"
           onTouchStart={handleTouchStart}
@@ -179,7 +179,7 @@ const PlansCards = ({ plans, onPlanSelect }: PlansCardsProps) => {
         {/* Navigation Buttons */}
         <Button
           onClick={goToPrevious}
-          className="absolute left-2 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-white/90 backdrop-blur-sm border-primary/70 hover:border-primary hover:bg-white shadow-lg z-10"
+          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-white/90 backdrop-blur-sm border-primary/70 hover:border-primary hover:bg-white shadow-lg z-10"
           size="icon"
         >
           <ArrowLeft className="h-4 w-4 text-gray-700" />
@@ -187,7 +187,7 @@ const PlansCards = ({ plans, onPlanSelect }: PlansCardsProps) => {
         
         <Button
           onClick={goToNext}
-          className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-white/90 backdrop-blur-sm border-primary/70 hover:border-primary hover:bg-white shadow-lg z-10"
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-white/90 backdrop-blur-sm border-primary/70 hover:border-primary hover:bg-white shadow-lg z-10"
           size="icon"
         >
           <ArrowRight className="h-4 w-4 text-gray-700" />
