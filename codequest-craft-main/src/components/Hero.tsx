@@ -10,18 +10,9 @@ const Hero = () => {
   // Bloquear/desbloquear scroll quando os planos estão abertos
   useEffect(() => {
     if (showPlans) {
-      
-      //scrolla para o topo
-      window.scrollTo({ top: 0, behavior: "auto" });
 
       // Salvar a posição atual do scroll
       const scrollY = window.scrollY;
-      
-      // Bloquear o scroll
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
-      document.body.style.overflow = 'hidden';
       
       return () => {
         // Restaurar o scroll quando fechar

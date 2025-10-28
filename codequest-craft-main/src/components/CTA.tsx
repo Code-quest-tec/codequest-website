@@ -14,7 +14,7 @@ const CTA = () => {
       <div className="absolute inset-0 bg-gradient-hero" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(165_50%_65%/0.1),transparent_70%)]" />
       
-      <div className="container relative z-10">
+      <div className="container relative">
         <div className="max-w-3xl mx-auto text-center space-y-6 sm:space-y-8">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold px-4">
             Pronto para transformar sua ideia em realidade?
