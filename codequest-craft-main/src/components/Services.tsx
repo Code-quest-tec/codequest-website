@@ -31,7 +31,7 @@ const Services = () => {
         className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_80%_20%,hsl(165_50%_65%/0.05),transparent_50%)]"
         aria-hidden
       />
-      <div className="container relative z-10">
+      <div className="container relative">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 px-4">
             Nossos Serviços
@@ -48,7 +48,7 @@ const Services = () => {
               className="bg-card border-border hover:border-primary/50 transition-all hover:shadow-glow group
                          max-h-[75dvh] overflow-y-auto sm:max-h-none sm:overflow-visible"
             >
-              <CardHeader className="pb-4 sticky top-0 bg-card/95 backdrop-blur z-10">
+              <CardHeader className="pb-4 sticky top-0 bg-card/95 backdrop-blur">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                   <service.icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                 </div>

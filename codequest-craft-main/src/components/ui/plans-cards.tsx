@@ -1,6 +1,10 @@
-import { Check, X, ArrowRight, ArrowLeft } from "lucide-react";
+import { Check, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 
 interface Plan {
   name: string;
@@ -17,54 +21,6 @@ interface PlansCardsProps {
 }
 
 const PlansCards = ({ plans, onPlanSelect }: PlansCardsProps) => {
-  const [currentCardIndex, setCurrentCardIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
-
-  const goToNext = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setCurrentCardIndex((prev) => (prev + 1) % plans.length);
-  };
-
-  const goToPrevious = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setCurrentCardIndex((prev) => (prev - 1 + plans.length) % plans.length);
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 30; // Reduzido de 50 para 30 para ser mais sensível
-    const isRightSwipe = distance < -30; // Reduzido de 50 para 30 para ser mais sensível
-
-    if (isLeftSwipe) {
-      goToNext();
-    } else if (isRightSwipe) {
-      goToPrevious();
-    }
-  };
-
-  useEffect(() => {
-    if (isAnimating) {
-      const timer = setTimeout(() => {
-        setIsAnimating(false);
-      }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, [isAnimating]);
 
   const PlanCard = ({ plan, index }: { plan: Plan; index: number }) => (
     <div
@@ -159,8 +115,8 @@ const PlansCards = ({ plans, onPlanSelect }: PlansCardsProps) => {
         ))}
       </div>
 
-      {/* Mobile: Manual Navigation */}
-      <div className="md:hidden relative px-6 sm:px-8 max-h-[85vh] overflow-y-auto">
+      {/* Mobile: Carousel */}
+      <div className="md:hidden relative px-8">
         {/* Dica de swipe */}
         <div className="text-center mb-4">
           <p className="text-xs text-muted-foreground">
@@ -168,52 +124,30 @@ const PlansCards = ({ plans, onPlanSelect }: PlansCardsProps) => {
           </p>
         </div>
         
-        <div 
-          className="w-full overflow-hidden"
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
+        <Carousel 
+          opts={{
+            align: "center",
+            loop: false,
+          }}
+          className="w-full"
         >
-          <div 
-            className={`transition-transform duration-300 ease-in-out ${
-              isAnimating ? 'transform translate-x-full opacity-0' : 'transform translate-x-0 opacity-100'
-            }`}
-          >
-            <PlanCard plan={plans[currentCardIndex]} index={currentCardIndex} />
+          <CarouselContent>
+            {plans.map((plan, index) => (
+              <CarouselItem key={index}>
+                <PlanCard plan={plan} index={index} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          
+          <div className="flex items-center justify-center gap-2 mt-4">
+            {plans.map((_, index) => (
+              <div
+                key={index}
+                className="w-2 h-2 rounded-full bg-gray-300"
+              />
+            ))}
           </div>
-        </div>
-        
-        {/* Navigation Buttons */}
-        <Button
-          onClick={goToPrevious}
-          className="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 h-7 w-7 rounded-full bg-white/90 backdrop-blur-sm border-primary/70 hover:border-primary hover:bg-white shadow-lg z-10"
-          size="icon"
-        >
-          <ArrowLeft className="h-3 w-3 text-gray-700" />
-        </Button>
-        
-        <Button
-          onClick={goToNext}
-          className="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 h-7 w-7 rounded-full bg-white/90 backdrop-blur-sm border-primary/70 hover:border-primary hover:bg-white shadow-lg z-10"
-          size="icon"
-        >
-          <ArrowRight className="h-3 w-3 text-gray-700" />
-        </Button>
-
-        {/* Indicadores de posição */}
-        <div className="flex justify-center mt-4 gap-2">
-          {plans.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentCardIndex(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentCardIndex 
-                  ? 'bg-primary w-6' 
-                  : 'bg-gray-300 hover:bg-gray-400'
-              }`}
-            />
-          ))}
-        </div>
+        </Carousel>
       </div>
     </div>
   );
